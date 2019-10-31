@@ -1,0 +1,20 @@
+:host {
+  box-shadow: 4px 4px 20px -8px rgba(0,0,0,0.65);
+  display: block;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.item {
+  position: relative;
+}
+
+.manage {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.action {
+  margin: 2px;
+}

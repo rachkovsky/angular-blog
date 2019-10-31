@@ -1,0 +1,7 @@
+<section class="blog-list px-3 py-5 p-md-5">
+  <div class="container">
+    <ng-container *ngFor="let preview of articlePreviewlist">
+      <app-article-preview (delete)="onArticleDelete($event)" [preview]="preview"></app-article-preview>
+    </ng-container>
+  </div>
+</section>

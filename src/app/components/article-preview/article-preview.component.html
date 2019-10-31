@@ -1,0 +1,25 @@
+<div class="item">
+  <div class="media">
+    <img *ngIf="preview.imageUrl" class="mr-3 img-fluid post-thumb d-none d-md-flex" [src]="preview.imageUrl"
+      alt="image">
+    <div class="media-body">
+      <h3 class="title mb-1"><a [routerLink]="['articles', preview.id]">{{ preview.title }}</a></h3>
+      <div class="meta mb-1">
+        <span class="date">Published: {{ preview.date?.toDate() | daysAgo }}</span>
+        <span class="time">5 min read</span>
+      </div>
+      <div class="intro">
+        {{ preview.excerpt || '' }}
+      </div>
+      <a class="more-link" [routerLink]="['articles', preview.id]">Read more →</a>
+    </div>
+  </div>
+  <div class="manage">
+    <button class="action">
+      <i class="fa fa-edit"></i>
+    </button>
+    <button (click)="deleteArticle(preview.id)" class="action">
+      <i class="fa fa-trash"></i>
+    </button>
+  </div>
+</div>
