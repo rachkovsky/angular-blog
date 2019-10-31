@@ -6,7 +6,7 @@
       <h3 class="title mb-1"><a [routerLink]="['articles', preview.id]">{{ preview.title }}</a></h3>
       <div class="meta mb-1">
         <span class="date">Published: {{ preview.date?.toDate() | daysAgo }}</span>
-        <span class="time">5 min read</span>
+        <span class="time">{{ preview.content.length | timeToRead }}</span>
       </div>
       <div class="intro">
         {{ preview.excerpt || '' }}
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="manage">
-    <button class="action">
+    <button (click)="editArticle(preview.id)" class="action">
       <i class="fa fa-edit"></i>
     </button>
     <button (click)="deleteArticle(preview.id)" class="action">

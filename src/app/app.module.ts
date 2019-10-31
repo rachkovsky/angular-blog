@@ -26,6 +26,7 @@ import { NgIfAdminDirective } from './directives/ng-if-admin.directive';
 
 import { DaysAgoPipe } from './pipes/daysAgo/days-ago.pipe';
 import { ResumeComponent } from './components/resume/resume.component';
+import { TimeToReadPipe } from './pipes/timeToRead/time-to-read.pipe';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
     NgIfAdminDirective,
     DaysAgoPipe,
     ResumeComponent,
+    TimeToReadPipe,
   ],
   imports: [
     BrowserModule,

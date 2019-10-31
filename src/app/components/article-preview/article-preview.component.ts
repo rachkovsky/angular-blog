@@ -27,4 +27,9 @@ export class ArticlePreviewComponent implements OnInit {
       });
   }
 
+
+  editArticle() {
+    //TBD....
+  }
+
 }
