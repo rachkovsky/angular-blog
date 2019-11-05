@@ -97,7 +97,7 @@
           </a>
         </li>
         <li *appNgIfAdmin class="nav-item">
-          <a class="nav-link" [routerLink]="['/']">
+          <a class="nav-link" (click)="logout()">
             Logout
           </a>
         </li>
