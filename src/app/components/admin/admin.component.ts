@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { FormGroup, FormControl, Validators, FormGroupName } from '@angular/forms';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -10,36 +11,47 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private db: AngularFireDatabase) { }
+  profileForm: FormGroup;
+  blogInfo: any;
 
-  profileForm;
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
-
-    let userInfo = this.db.object('test-2c54d').valueChanges().subscribe((data) => {
-      console.log(data);
-    });
-
-    
-    console.log(userInfo);
-
-    this.profileForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    });
-
-    this.profileForm.get('firstName').valueChanges.subscribe(val => {
-      // console.log(val);
-      // console.log(this.profileForm.valid);
-    });
+    this.afs.collection('blogInfo').snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+        )).subscribe((blogInfo) => {
+          this.blogInfo = blogInfo[0];
+          console.log('-------', this.blogInfo);
+          this.createForm();
+        });
 
   }
 
-  onSubmit(form) {
-    if (form.valid && form.touched) {
-      //
+  createForm() {
+    this.profileForm = new FormGroup({
+      blogName: new FormControl(this.blogInfo.title, [Validators.required, Validators.minLength(1)]),
+      blogDescription: new FormControl(this.blogInfo.description, [Validators.required, Validators.minLength(1)]),
+    });
+  }
+
+
+  onSubmit(form: FormGroup) {
+    if (form.valid) {
+      this.afs
+        .collection('blogInfo')
+        .doc(this.blogInfo.id)
+        .set(
+          { title: form.value.blogName, description: form.value.blogDescription },
+          { merge: true })
+        .then((res) => {
+          console.log('Form was sent to server');
+        });
     }
-    console.log('=== ', form);
   }
 
 }
