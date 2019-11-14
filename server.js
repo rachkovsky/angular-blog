@@ -13,5 +13,11 @@ app.get('/*', function(req,res) {
 
 });
 
+
+app.post('/api/test', function (req, res) {
+    // request to DB ....
+    res.send(JSON.stringify('Response from server'));
+});
+
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
