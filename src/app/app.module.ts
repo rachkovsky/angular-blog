@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 
@@ -86,7 +87,8 @@ const appRoutes: Routes = [
     AngularFireAuthGuardModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
   ],
   providers: [
     ArticleListResolverService,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-article-preview-list',
@@ -10,11 +11,16 @@ export class ArticlePreviewListComponent implements OnInit {
 
   articlePreviewlist: any[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
     this.articlePreviewlist = this.route.snapshot.data.articles;
     console.log('articlePreviewlist: ', this.articlePreviewlist);
+
+    this.http.post('/api/test', {}).subscribe((data) => {
+      console.log(data);
+    });
+
   }
 
   onArticleDelete(id) {
