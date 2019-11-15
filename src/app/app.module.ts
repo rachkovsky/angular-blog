@@ -31,6 +31,9 @@ import { TimeToReadPipe } from './pipes/timeToRead/time-to-read.pipe';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
+import { HttpExampleComponent } from './components/http-example/http-example.component';
+
+
 const appRoutes: Routes = [
   {
     path: '', component: ArticlePreviewListComponent,
@@ -72,6 +75,7 @@ const appRoutes: Routes = [
     DaysAgoPipe,
     ResumeComponent,
     TimeToReadPipe,
+    HttpExampleComponent,
   ],
   imports: [
     BrowserModule,
