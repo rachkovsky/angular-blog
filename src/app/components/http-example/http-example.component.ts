@@ -17,7 +17,7 @@ export class HttpExampleComponent implements OnInit {
 
     this.http.post('/api/test', {}).subscribe((data) => {
       this.dataFromServer = data;
-      console.log(data);
+      console.log('-----', data);
     });
 
   }
